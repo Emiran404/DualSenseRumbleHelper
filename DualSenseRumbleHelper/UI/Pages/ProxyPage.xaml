@@ -1,0 +1,58 @@
+﻿<Page x:Class="DualSenseRumbleHelper.UI.Pages.ProxyPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:ui="http://schemas.lepo.co/wpfui/2022/xaml"
+      xmlns:l="clr-namespace:DualSenseRumbleHelper.UI"
+      Title="Proxy DLL">
+    <ScrollViewer VerticalScrollBarVisibility="Auto" Padding="40,0,40,24">
+        <StackPanel MaxWidth="1000">
+            <ui:InfoBar IsOpen="True" IsClosable="False" Severity="Error" Margin="0,0,0,8"
+                        Title="{l:T proxy.eacTitle}"
+                        Message="{l:T proxy.eacText}" />
+            <ui:CardControl Icon="{ui:SymbolIcon ShieldError24}" Margin="0,0,0,16">
+                <ui:CardControl.Header>
+                    <StackPanel>
+                        <ui:TextBlock Foreground="{DynamicResource TextFillColorPrimaryBrush}" FontTypography="Body" Text="{l:T proxy.accept}" />
+                        <ui:TextBlock FontTypography="Caption" Foreground="{DynamicResource TextFillColorSecondaryBrush}" TextWrapping="Wrap" Text="{l:T proxy.acceptDetail}" />
+                    </StackPanel>
+                </ui:CardControl.Header>
+                <ui:ToggleSwitch x:Name="AcceptToggle" Click="Accept_Click" />
+            </ui:CardControl>
+
+            <ui:TextBlock FontTypography="Caption" Foreground="{DynamicResource TextFillColorSecondaryBrush}" TextWrapping="Wrap" Margin="4,0,0,16"
+                          Text="{l:T proxy.intro}" />
+
+            <ui:TextBlock Foreground="{DynamicResource TextFillColorPrimaryBrush}" FontTypography="BodyStrong" Text="{l:T proxy.target}" Margin="0,0,0,8" />
+            <ui:CardControl Icon="{ui:SymbolIcon Rocket24}" Margin="0,0,0,4">
+                <ui:CardControl.Header>
+                    <StackPanel>
+                        <ui:TextBlock Foreground="{DynamicResource TextFillColorPrimaryBrush}" FontTypography="Body" Text="{l:T proxy.install}" />
+                        <ui:TextBlock x:Name="AnalysisText" FontTypography="Caption" Foreground="{DynamicResource TextFillColorSecondaryBrush}" TextWrapping="Wrap" Text="…" />
+                    </StackPanel>
+                </ui:CardControl.Header>
+                <ComboBox x:Name="GameCombo" MinWidth="360" SelectionChanged="GameCombo_SelectionChanged" />
+            </ui:CardControl>
+            <ui:CardControl Icon="{ui:SymbolIcon DocumentBulletList24}" Margin="0,0,0,4">
+                <ui:CardControl.Header>
+                    <StackPanel>
+                        <ui:TextBlock Foreground="{DynamicResource TextFillColorPrimaryBrush}" x:Name="StateText" FontTypography="Body" Text="…" />
+                        <ui:TextBlock x:Name="StateSub" FontTypography="Caption" Foreground="{DynamicResource TextFillColorSecondaryBrush}" TextWrapping="Wrap" Text="" />
+                    </StackPanel>
+                </ui:CardControl.Header>
+                <StackPanel Orientation="Horizontal">
+                    <ui:Button x:Name="InstallButton" Appearance="Danger" Content="{l:T proxy.installButton}" Icon="{ui:SymbolIcon ArrowDownload24}" Margin="0,0,8,0" Click="Install_Click" ToolTip="{l:T proxy.installTip}" />
+                    <ui:Button x:Name="UninstallButton" Appearance="Primary" Content="{l:T proxy.uninstallButton}" Icon="{ui:SymbolIcon ArrowUndo24}" Margin="0,0,8,0" Click="Uninstall_Click" ToolTip="{l:T proxy.uninstallTip}" />
+                    <ui:Button Content="{l:T common.openFolder}" Icon="{ui:SymbolIcon FolderOpen24}" Click="OpenFolder_Click" />
+                </StackPanel>
+            </ui:CardControl>
+
+            <ui:CardExpander Icon="{ui:SymbolIcon Info24}" Margin="0,16,0,0" IsExpanded="False">
+                <ui:CardExpander.Header>
+                    <ui:TextBlock Foreground="{DynamicResource TextFillColorPrimaryBrush}" FontTypography="Body" Text="{l:T proxy.notes}" />
+                </ui:CardExpander.Header>
+                <ui:TextBlock FontTypography="Caption" Foreground="{DynamicResource TextFillColorSecondaryBrush}" TextWrapping="Wrap"
+                              Text="{l:T proxy.notesText}" />
+            </ui:CardExpander>
+        </StackPanel>
+    </ScrollViewer>
+</Page>

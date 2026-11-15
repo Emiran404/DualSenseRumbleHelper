@@ -1,0 +1,277 @@
+﻿<Page x:Class="DualSenseRumbleHelper.UI.Pages.SettingsPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:ui="http://schemas.lepo.co/wpfui/2022/xaml"
+      xmlns:l="clr-namespace:DualSenseRumbleHelper.UI"
+      Title="Ayarlar">
+    <ScrollViewer VerticalScrollBarVisibility="Auto" Padding="40,0,40,24">
+        <StackPanel MaxWidth="1000">
+            <ui:TextBlock Foreground="{DynamicResource TextFillColorPrimaryBrush}" FontTypography="BodyStrong" Text="{l:T set.appearance}" Margin="0,0,0,8" />
+            <ui:CardControl Icon="{ui:SymbolIcon Color24}" Margin="0,0,0,4">
+                <ui:CardControl.Header>
+                    <StackPanel>
+                        <ui:TextBlock Foreground="{DynamicResource TextFillColorPrimaryBrush}" FontTypography="Body" Text="{l:T set.theme}" />
+                        <ui:TextBlock FontTypography="Caption" Foreground="{DynamicResource TextFillColorSecondaryBrush}" Text="{l:T set.themeDetail}" />
+                    </StackPanel>
+                </ui:CardControl.Header>
+                <ComboBox x:Name="ThemeCombo" MinWidth="160" SelectionChanged="Theme_Changed">
+                    <ComboBoxItem Content="{l:T set.themeSystem}" Tag="System" />
+                    <ComboBoxItem Content="{l:T set.themeLight}" Tag="Light" />
+                    <ComboBoxItem Content="{l:T set.themeDark}" Tag="Dark" />
+                </ComboBox>
+            </ui:CardControl>
+            <ui:CardControl Icon="{ui:SymbolIcon LocalLanguage24}" Margin="0,0,0,4">
+                <ui:CardControl.Header>
+                    <StackPanel>
+                        <ui:TextBlock Foreground="{DynamicResource TextFillColorPrimaryBrush}" FontTypography="Body" Text="{l:T set.language}" />
+                        <ui:TextBlock FontTypography="Caption" Foreground="{DynamicResource TextFillColorSecondaryBrush}" Text="{l:T set.languageDetail}" />
+                    </StackPanel>
+                </ui:CardControl.Header>
+                <ComboBox x:Name="LanguageCombo" MinWidth="200" SelectionChanged="Language_Changed" />
+            </ui:CardControl>
+
+            <ui:TextBlock Foreground="{DynamicResource TextFillColorPrimaryBrush}" FontTypography="BodyStrong" Text="{l:T set.startup}" Margin="0,20,0,8" />
+            <ui:CardControl Icon="{ui:SymbolIcon Power24}" Margin="0,0,0,4">
+                <ui:CardControl.Header>
+                    <StackPanel>
+                        <ui:TextBlock Foreground="{DynamicResource TextFillColorPrimaryBrush}" FontTypography="Body" Text="{l:T set.runAtStartup}" />
+                        <ui:TextBlock FontTypography="Caption" Foreground="{DynamicResource TextFillColorSecondaryBrush}" Text="{l:T set.runAtStartupDetail}" />
+                    </StackPanel>
+                </ui:CardControl.Header>
+                <ui:ToggleSwitch x:Name="StartupToggle" Click="Startup_Click" />
+            </ui:CardControl>
+            <ui:CardControl Icon="{ui:SymbolIcon ArrowMinimize24}" Margin="0,0,0,4">
+                <ui:CardControl.Header>
+                    <StackPanel>
+                        <ui:TextBlock Foreground="{DynamicResource TextFillColorPrimaryBrush}" FontTypography="Body" Text="{l:T set.startMinimized}" />
+                    </StackPanel>
+                </ui:CardControl.Header>
+                <ui:ToggleSwitch x:Name="MinimizedToggle" Click="Minimized_Click" />
+            </ui:CardControl>
+            <ui:CardControl Icon="{ui:SymbolIcon Dismiss24}" Margin="0,0,0,4">
+                <ui:CardControl.Header>
+                    <StackPanel>
+                        <ui:TextBlock Foreground="{DynamicResource TextFillColorPrimaryBrush}" FontTypography="Body" Text="{l:T set.closeToTray}" />
+                        <ui:TextBlock FontTypography="Caption" Foreground="{DynamicResource TextFillColorSecondaryBrush}" Text="{l:T set.closeToTrayDetail}" />
+                    </StackPanel>
+                </ui:CardControl.Header>
+                <ui:ToggleSwitch x:Name="CloseToTrayToggle" Click="CloseToTray_Click" />
+            </ui:CardControl>
+
+            <ui:TextBlock Foreground="{DynamicResource TextFillColorPrimaryBrush}" FontTypography="BodyStrong" Text="{l:T set.auto}" Margin="0,20,0,8" />
+            <ui:CardControl Icon="{ui:SymbolIcon Play24}" Margin="0,0,0,4">
+                <ui:CardControl.Header>
+                    <StackPanel>
+                        <ui:TextBlock Foreground="{DynamicResource TextFillColorPrimaryBrush}" FontTypography="Body" Text="{l:T set.autoStart}" />
+                        <ui:TextBlock FontTypography="Caption" Foreground="{DynamicResource TextFillColorSecondaryBrush}" Text="{l:T set.autoStartDetail}" />
+                    </StackPanel>
+                </ui:CardControl.Header>
+                <ui:ToggleSwitch x:Name="AutoStartToggle" Click="AutoStart_Click" />
+            </ui:CardControl>
+            <ui:CardControl Icon="{ui:SymbolIcon Stop24}" Margin="0,0,0,4">
+                <ui:CardControl.Header>
+                    <StackPanel>
+                        <ui:TextBlock Foreground="{DynamicResource TextFillColorPrimaryBrush}" FontTypography="Body" Text="{l:T set.autoStop}" />
+                    </StackPanel>
+                </ui:CardControl.Header>
+                <ui:ToggleSwitch x:Name="AutoStopToggle" Click="AutoStop_Click" />
+            </ui:CardControl>
+            <ui:CardControl Icon="{ui:SymbolIcon Folder24}" Margin="0,0,0,4">
+                <ui:CardControl.Header>
+                    <StackPanel>
+                        <ui:TextBlock Foreground="{DynamicResource TextFillColorPrimaryBrush}" FontTypography="Body" Text="{l:T set.gameFolder}" />
+                        <ui:TextBlock x:Name="GameFolderText" FontTypography="Caption" Foreground="{DynamicResource TextFillColorSecondaryBrush}" TextWrapping="Wrap" Text="…" />
+                    </StackPanel>
+                </ui:CardControl.Header>
+                <StackPanel Orientation="Horizontal">
+                    <ui:Button Content="{l:T set.pickFolder}" Icon="{ui:SymbolIcon FolderSearch24}" Margin="0,0,8,0" Click="PickFolder_Click" />
+                    <ui:Button Content="{l:T set.rescan}" Icon="{ui:SymbolIcon ArrowSync24}" Click="Rescan_Click" />
+                </StackPanel>
+            </ui:CardControl>
+
+            <ui:TextBlock Foreground="{DynamicResource TextFillColorPrimaryBrush}" FontTypography="BodyStrong" Text="{l:T set.motors}" Margin="0,20,0,2" />
+            <ui:TextBlock FontTypography="Caption" Foreground="{DynamicResource TextFillColorSecondaryBrush}" Text="{l:T set.motorsDetail}" Margin="0,0,0,8" />
+            <ui:CardControl Icon="{ui:SymbolIcon Pulse24}" Margin="0,0,0,4">
+                <ui:CardControl.Header>
+                    <ui:TextBlock Foreground="{DynamicResource TextFillColorPrimaryBrush}" FontTypography="Body" Text="{l:T set.rumbleOn}" />
+                </ui:CardControl.Header>
+                <ui:ToggleSwitch x:Name="RumbleToggle" Click="Rumble_Click" />
+            </ui:CardControl>
+            <ui:CardControl Icon="{ui:SymbolIcon ArrowLeft24}" Margin="0,0,0,4">
+                <ui:CardControl.Header>
+                    <StackPanel>
+                        <ui:TextBlock Foreground="{DynamicResource TextFillColorPrimaryBrush}" FontTypography="Body" Text="{l:T set.left}" />
+                        <ui:TextBlock FontTypography="Caption" Foreground="{DynamicResource TextFillColorSecondaryBrush}" Text="{l:T set.leftDetail}" />
+                    </StackPanel>
+                </ui:CardControl.Header>
+                <StackPanel Orientation="Horizontal">
+                    <Slider x:Name="LeftSlider" Width="260" Minimum="0" Maximum="150" TickFrequency="10" IsSnapToTickEnabled="False" ValueChanged="Left_Changed" VerticalAlignment="Center" />
+                    <TextBlock Foreground="{DynamicResource TextFillColorPrimaryBrush}" x:Name="LeftValue" Width="52" Margin="12,0,0,0" VerticalAlignment="Center" TextAlignment="Right" Text="100 %" />
+                </StackPanel>
+            </ui:CardControl>
+            <ui:CardControl Icon="{ui:SymbolIcon ArrowRight24}" Margin="0,0,0,4">
+                <ui:CardControl.Header>
+                    <StackPanel>
+                        <ui:TextBlock Foreground="{DynamicResource TextFillColorPrimaryBrush}" FontTypography="Body" Text="{l:T set.right}" />
+                        <ui:TextBlock FontTypography="Caption" Foreground="{DynamicResource TextFillColorSecondaryBrush}" Text="{l:T set.rightDetail}" />
+                    </StackPanel>
+                </ui:CardControl.Header>
+                <StackPanel Orientation="Horizontal">
+                    <Slider x:Name="RightSlider" Width="260" Minimum="0" Maximum="150" TickFrequency="10" IsSnapToTickEnabled="False" ValueChanged="Right_Changed" VerticalAlignment="Center" />
+                    <TextBlock Foreground="{DynamicResource TextFillColorPrimaryBrush}" x:Name="RightValue" Width="52" Margin="12,0,0,0" VerticalAlignment="Center" TextAlignment="Right" Text="100 %" />
+                </StackPanel>
+            </ui:CardControl>
+            <ui:CardControl Icon="{ui:SymbolIcon Filter24}" Margin="0,0,0,4">
+                <ui:CardControl.Header>
+                    <StackPanel>
+                        <ui:TextBlock Foreground="{DynamicResource TextFillColorPrimaryBrush}" FontTypography="Body" Text="{l:T set.threshold}" />
+                        <ui:TextBlock FontTypography="Caption" Foreground="{DynamicResource TextFillColorSecondaryBrush}" Text="{l:T set.thresholdDetail}" />
+                    </StackPanel>
+                </ui:CardControl.Header>
+                <StackPanel Orientation="Horizontal">
+                    <Slider x:Name="MinSlider" Width="260" Minimum="0" Maximum="80" TickFrequency="5" ValueChanged="Min_Changed" VerticalAlignment="Center" />
+                    <TextBlock Foreground="{DynamicResource TextFillColorPrimaryBrush}" x:Name="MinValue" Width="52" Margin="12,0,0,0" VerticalAlignment="Center" TextAlignment="Right" Text="0" />
+                </StackPanel>
+            </ui:CardControl>
+            <ui:CardControl Icon="{ui:SymbolIcon ArrowSwap24}" Margin="0,0,0,4">
+                <ui:CardControl.Header>
+                    <ui:TextBlock Foreground="{DynamicResource TextFillColorPrimaryBrush}" FontTypography="Body" Text="{l:T set.swap}" />
+                </ui:CardControl.Header>
+                <ui:ToggleSwitch x:Name="SwapToggle" Click="Swap_Click" />
+            </ui:CardControl>
+            <StackPanel Orientation="Horizontal" Margin="0,8,0,0">
+                <ui:Button Content="{l:T set.test}" Icon="{ui:SymbolIcon Pulse24}" Margin="0,0,8,0" Click="Test_Click" />
+                <ui:Button Content="{l:T common.openSettingsFolder}" Icon="{ui:SymbolIcon FolderOpen24}" Click="OpenSettingsFolder_Click" />
+            </StackPanel>
+
+            <!-- Lightbar -->
+            <ui:TextBlock Foreground="{DynamicResource TextFillColorPrimaryBrush}" FontTypography="BodyStrong" Text="{l:T set.lightbar}" Margin="0,24,0,2" />
+            <ui:TextBlock FontTypography="Caption" Foreground="{DynamicResource TextFillColorSecondaryBrush}" TextWrapping="Wrap" Margin="0,0,0,8"
+                          Text="{l:T set.lightbarDetail}" />
+            <Border CornerRadius="8" Padding="16" Background="{DynamicResource CardBackgroundFillColorDefaultBrush}" BorderBrush="{DynamicResource CardStrokeColorDefaultBrush}" BorderThickness="1">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="Auto" />
+                    </Grid.ColumnDefinitions>
+                    <StackPanel>
+                        <ui:TextBlock Foreground="{DynamicResource TextFillColorPrimaryBrush}" FontTypography="Body" Text="{l:T set.lbMode}" Margin="0,0,0,8" />
+                        <WrapPanel x:Name="ModePanel" Margin="0,0,0,4" />
+                        <ui:TextBlock x:Name="ModeDescription" FontTypography="Caption" Foreground="{DynamicResource TextFillColorSecondaryBrush}" Margin="0,2,0,16" Text="" />
+
+                        <StackPanel x:Name="ColorSection">
+                            <ui:TextBlock Foreground="{DynamicResource TextFillColorPrimaryBrush}" FontTypography="Body" Text="{l:T set.lbColor}" Margin="0,0,0,8" />
+                            <WrapPanel x:Name="SwatchPanel" Margin="0,0,0,12" />
+
+                            <ui:TextBlock Foreground="{DynamicResource TextFillColorPrimaryBrush}" FontTypography="Body" Text="{l:T set.lbCustom}" Margin="0,4,0,6" />
+                            <Grid Margin="0,0,0,4">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="80" />
+                                    <ColumnDefinition Width="*" MaxWidth="420" />
+                                </Grid.ColumnDefinitions>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="Auto" />
+                                    <RowDefinition Height="Auto" />
+                                    <RowDefinition Height="Auto" />
+                                </Grid.RowDefinitions>
+                                <ui:TextBlock Foreground="{DynamicResource TextFillColorPrimaryBrush}" Grid.Row="0" FontTypography="Caption" VerticalAlignment="Center" Text="{l:T set.lbHue}" />
+                                <Grid Grid.Row="0" Grid.Column="1" Margin="0,4">
+                                    <Border Height="10" CornerRadius="5" VerticalAlignment="Center" Margin="8,0">
+                                        <Border.Background>
+                                            <LinearGradientBrush StartPoint="0,0" EndPoint="1,0">
+                                                <GradientStop Color="#FF0000" Offset="0" />
+                                                <GradientStop Color="#FFFF00" Offset="0.1667" />
+                                                <GradientStop Color="#00FF00" Offset="0.3333" />
+                                                <GradientStop Color="#00FFFF" Offset="0.5" />
+                                                <GradientStop Color="#0000FF" Offset="0.6667" />
+                                                <GradientStop Color="#FF00FF" Offset="0.8333" />
+                                                <GradientStop Color="#FF0000" Offset="1" />
+                                            </LinearGradientBrush>
+                                        </Border.Background>
+                                    </Border>
+                                    <Slider x:Name="HueSlider" Minimum="0" Maximum="359" ValueChanged="Custom_Changed" Opacity="0.95" />
+                                </Grid>
+                                <ui:TextBlock Foreground="{DynamicResource TextFillColorPrimaryBrush}" Grid.Row="1" FontTypography="Caption" VerticalAlignment="Center" Text="{l:T set.lbSaturation}" />
+                                <Grid Grid.Row="1" Grid.Column="1" Margin="0,4">
+                                    <Border x:Name="SatTrack" Height="10" CornerRadius="5" VerticalAlignment="Center" Margin="8,0" />
+                                    <Slider x:Name="SatSlider" Minimum="0" Maximum="100" ValueChanged="Custom_Changed" />
+                                </Grid>
+                                <ui:TextBlock Foreground="{DynamicResource TextFillColorPrimaryBrush}" Grid.Row="2" FontTypography="Caption" VerticalAlignment="Center" Text="Hex" />
+                                <StackPanel Grid.Row="2" Grid.Column="1" Orientation="Horizontal" Margin="0,4">
+                                    <ui:TextBox x:Name="HexBox" Width="120" PlaceholderText="#0078FF" KeyDown="Hex_KeyDown" LostFocus="Hex_LostFocus" />
+                                </StackPanel>
+                            </Grid>
+                        </StackPanel>
+
+                        <ui:TextBlock Foreground="{DynamicResource TextFillColorPrimaryBrush}" FontTypography="Body" Text="{l:T set.lbBrightness}" Margin="0,12,0,4" />
+                        <StackPanel Orientation="Horizontal">
+                            <Slider x:Name="BrightSlider" Width="300" Minimum="5" Maximum="100" ValueChanged="Bright_Changed" VerticalAlignment="Center" />
+                            <TextBlock Foreground="{DynamicResource TextFillColorPrimaryBrush}" x:Name="BrightValue" Width="52" Margin="12,0,0,0" VerticalAlignment="Center" TextAlignment="Right" Text="100 %" />
+                        </StackPanel>
+                    </StackPanel>
+
+                    <!-- live preview -->
+                    <StackPanel Grid.Column="1" Margin="24,0,0,0" Width="180">
+                        <ui:TextBlock FontTypography="Caption" Foreground="{DynamicResource TextFillColorSecondaryBrush}" Text="{l:T set.lbPreview}" Margin="0,0,0,8" />
+                        <Border Height="120" CornerRadius="12" BorderThickness="1" BorderBrush="{DynamicResource CardStrokeColorDefaultBrush}" Background="#101418" ClipToBounds="True">
+                            <Grid>
+                                <Ellipse x:Name="Glow" Width="150" Height="60" Opacity="0.55">
+                                    <Ellipse.Effect>
+                                        <BlurEffect Radius="28" />
+                                    </Ellipse.Effect>
+                                </Ellipse>
+                                <Border x:Name="PreviewBar" Width="110" Height="12" CornerRadius="6" />
+                            </Grid>
+                        </Border>
+                        <TextBlock x:Name="PreviewHex" Margin="0,8,0,8" HorizontalAlignment="Center" FontFamily="Cascadia Mono, Consolas" FontSize="12" Foreground="{DynamicResource TextFillColorSecondaryBrush}" Text="" />
+                        <ui:Button Content="{l:T set.lbTry}" Icon="{ui:SymbolIcon Lightbulb24}" HorizontalAlignment="Stretch" Click="TryOnPad_Click" />
+                    </StackPanel>
+                </Grid>
+            </Border>
+
+            <!-- About / credits -->
+            <ui:TextBlock Foreground="{DynamicResource TextFillColorPrimaryBrush}" FontTypography="BodyStrong" Text="{l:T about.title}" Margin="0,24,0,8" />
+            <Border CornerRadius="8" Padding="20" Margin="0,0,0,4" Background="{DynamicResource CardBackgroundFillColorDefaultBrush}" BorderBrush="{DynamicResource CardStrokeColorDefaultBrush}" BorderThickness="1">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto" />
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="Auto" />
+                    </Grid.ColumnDefinitions>
+                    <Image x:Name="AppIcon" Width="56" Height="56" Margin="0,0,18,0" VerticalAlignment="Center" RenderOptions.BitmapScalingMode="HighQuality" />
+                    <StackPanel Grid.Column="1" VerticalAlignment="Center">
+                        <ui:TextBlock Foreground="{DynamicResource TextFillColorPrimaryBrush}" FontTypography="Subtitle" Text="DualSense Rumble Helper" />
+                        <ui:TextBlock x:Name="VersionText" FontTypography="Body" Foreground="{DynamicResource TextFillColorSecondaryBrush}" Margin="0,2,0,0" Text="" />
+                        <ui:TextBlock x:Name="AuthorText" FontTypography="Caption" Foreground="{DynamicResource TextFillColorSecondaryBrush}" TextWrapping="Wrap" Margin="0,2,0,0" Text="" />
+                    </StackPanel>
+                    <StackPanel Grid.Column="2" Orientation="Horizontal" VerticalAlignment="Center">
+                        <ui:Button Appearance="Primary" Content="GitHub" Icon="{ui:SymbolIcon Code24}" Margin="0,0,8,0" Click="Github_Click" />
+                        <ui:Button Content="{l:T about.releases}" Icon="{ui:SymbolIcon ArrowDownload24}" Click="Releases_Click" />
+                    </StackPanel>
+                </Grid>
+            </Border>
+            <ui:CardControl Icon="{ui:SymbolIcon Bug24}" Margin="0,0,0,4">
+                <ui:CardControl.Header>
+                    <StackPanel>
+                        <ui:TextBlock Foreground="{DynamicResource TextFillColorPrimaryBrush}" FontTypography="Body" Text="{l:T about.report}" />
+                        <ui:TextBlock FontTypography="Caption" Foreground="{DynamicResource TextFillColorSecondaryBrush}" TextWrapping="Wrap" Text="{l:T about.reportDetail}" />
+                    </StackPanel>
+                </ui:CardControl.Header>
+                <StackPanel Orientation="Horizontal">
+                    <ui:Button Content="{l:T about.copyInfo}" Icon="{ui:SymbolIcon Copy24}" Margin="0,0,8,0" Click="CopyInfo_Click" />
+                    <ui:Button Content="{l:T about.openIssues}" Icon="{ui:SymbolIcon Open24}" Click="Issues_Click" />
+                </StackPanel>
+            </ui:CardControl>
+            <ui:CardExpander Icon="{ui:SymbolIcon People24}" Margin="0,0,0,4" IsExpanded="False">
+                <ui:CardExpander.Header>
+                    <StackPanel>
+                        <ui:TextBlock Foreground="{DynamicResource TextFillColorPrimaryBrush}" FontTypography="Body" Text="{l:T about.credits}" />
+                        <ui:TextBlock FontTypography="Caption" Foreground="{DynamicResource TextFillColorSecondaryBrush}" Text="{l:T about.creditsDetail}" />
+                    </StackPanel>
+                </ui:CardExpander.Header>
+                <StackPanel x:Name="CreditsPanel" />
+            </ui:CardExpander>
+            <ui:TextBlock FontTypography="Caption" Foreground="{DynamicResource TextFillColorSecondaryBrush}" TextWrapping="Wrap" Margin="4,12,0,0" Text="{l:T about.disclaimer}" />
+        </StackPanel>
+    </ScrollViewer>
+</Page>

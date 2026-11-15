@@ -1,0 +1,18 @@
+# Build output
+bin/
+obj/
+dist/
+dist_*/
+tools/
+*.pdb
+DualSenseRumbleHelper/Resources/*.lib
+
+# IDE
+.vs/
+.vscode/
+*.user
+*.suo
+
+# Local test output
+*.log
+selftest*.txt

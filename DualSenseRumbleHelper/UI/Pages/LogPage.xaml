@@ -1,0 +1,40 @@
+﻿<Page x:Class="DualSenseRumbleHelper.UI.Pages.LogPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:ui="http://schemas.lepo.co/wpfui/2022/xaml"
+      xmlns:local="clr-namespace:DualSenseRumbleHelper.UI"
+      xmlns:l="clr-namespace:DualSenseRumbleHelper.UI"
+      Title="Günlük">
+    <Grid Margin="40,0,40,24">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+        <StackPanel Orientation="Horizontal" Margin="0,0,0,12">
+            <ui:Button Content="{l:T log.copy}" Icon="{ui:SymbolIcon Copy24}" Margin="0,0,8,0" Click="Copy_Click" />
+            <ui:Button Content="{l:T log.clear}" Icon="{ui:SymbolIcon Delete24}" Margin="0,0,8,0" Click="Clear_Click" />
+            <ui:Button Content="{l:T common.openSettingsFolder}" Icon="{ui:SymbolIcon FolderOpen24}" Click="OpenFolder_Click" />
+        </StackPanel>
+        <Border Grid.Row="1" CornerRadius="8" Background="{DynamicResource CardBackgroundFillColorDefaultBrush}" BorderBrush="{DynamicResource CardStrokeColorDefaultBrush}" BorderThickness="1" Padding="4">
+            <ListBox x:Name="List" ItemsSource="{Binding}" Background="Transparent" BorderThickness="0" FontFamily="Cascadia Mono, Consolas" FontSize="12"
+                     ScrollViewer.HorizontalScrollBarVisibility="Disabled">
+                <ListBox.ItemTemplate>
+                    <DataTemplate DataType="{x:Type local:LogEntry}">
+                        <TextBlock Text="{Binding Line}" TextWrapping="Wrap">
+                            <TextBlock.Style>
+                                <Style TargetType="TextBlock">
+                                    <Setter Property="Foreground" Value="{DynamicResource TextFillColorSecondaryBrush}" />
+                                    <Style.Triggers>
+                                        <DataTrigger Binding="{Binding IsError}" Value="True">
+                                            <Setter Property="Foreground" Value="{DynamicResource SystemFillColorCriticalBrush}" />
+                                        </DataTrigger>
+                                    </Style.Triggers>
+                                </Style>
+                            </TextBlock.Style>
+                        </TextBlock>
+                    </DataTemplate>
+                </ListBox.ItemTemplate>
+            </ListBox>
+        </Border>
+    </Grid>
+</Page>

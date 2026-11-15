@@ -1,0 +1,91 @@
+﻿<Page x:Class="DualSenseRumbleHelper.UI.Pages.SteamPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:ui="http://schemas.lepo.co/wpfui/2022/xaml"
+      xmlns:l="clr-namespace:DualSenseRumbleHelper.UI"
+      Title="Steam Input">
+    <ScrollViewer VerticalScrollBarVisibility="Auto" Padding="40,0,40,24">
+        <StackPanel MaxWidth="1000" HorizontalAlignment="Stretch">
+            <ui:InfoBar IsOpen="True" IsClosable="False" Severity="Success" Margin="0,0,0,16"
+                        Title="{l:T steam.infoTitle}"
+                        Message="{l:T steam.infoText}" />
+
+            <ui:TextBlock Foreground="{DynamicResource TextFillColorPrimaryBrush}" FontTypography="BodyStrong" Text="{l:T steam.detection}" Margin="0,0,0,8" />
+            <ui:CardControl Icon="{ui:SymbolIcon Rocket24}" Margin="0,0,0,4">
+                <ui:CardControl.Header>
+                    <StackPanel>
+                        <ui:TextBlock Foreground="{DynamicResource TextFillColorPrimaryBrush}" FontTypography="Body" Text="Rocket League" />
+                        <ui:TextBlock x:Name="GameText" FontTypography="Caption" Foreground="{DynamicResource TextFillColorSecondaryBrush}" TextWrapping="Wrap" Text="…" />
+                    </StackPanel>
+                </ui:CardControl.Header>
+                <ui:Button Content="{l:T common.openFolder}" Icon="{ui:SymbolIcon FolderOpen24}" Click="OpenFolder_Click" />
+            </ui:CardControl>
+            <ui:CardControl Icon="{ui:SymbolIcon Cloud24}" Margin="0,0,0,4">
+                <ui:CardControl.Header>
+                    <StackPanel>
+                        <ui:TextBlock Foreground="{DynamicResource TextFillColorPrimaryBrush}" FontTypography="Body" Text="Steam" />
+                        <ui:TextBlock x:Name="SteamText" FontTypography="Caption" Foreground="{DynamicResource TextFillColorSecondaryBrush}" TextWrapping="Wrap" Text="…" />
+                    </StackPanel>
+                </ui:CardControl.Header>
+                <ui:Button Content="{l:T steam.openSteam}" Appearance="Primary" Icon="{ui:SymbolIcon Open24}" Click="OpenSteam_Click" />
+            </ui:CardControl>
+            <ui:InfoBar x:Name="ConflictBar" IsOpen="False" IsClosable="False" Severity="Warning" Title="{l:T steam.conflict}" Margin="0,4,0,0" />
+
+            <ui:TextBlock Foreground="{DynamicResource TextFillColorPrimaryBrush}" FontTypography="BodyStrong" Text="{l:T steam.steps}" Margin="0,20,0,8" />
+            <ui:CardControl Margin="0,0,0,4">
+                <ui:CardControl.Icon>
+                    <ui:FontIcon FontFamily="Segoe UI Semibold" FontSize="16" Glyph="1" />
+                </ui:CardControl.Icon>
+                <ui:CardControl.Header>
+                    <StackPanel>
+                        <ui:TextBlock Foreground="{DynamicResource TextFillColorPrimaryBrush}" FontTypography="Body" TextWrapping="Wrap" Text="{l:T steam.step1}" />
+                        <ui:TextBlock FontTypography="Caption" Foreground="{DynamicResource TextFillColorSecondaryBrush}" TextWrapping="Wrap"
+                                      Text="{l:T steam.step1Detail}" />
+                        <TextBlock x:Name="ExePathText" Margin="0,6,0,0" FontFamily="Cascadia Mono, Consolas" FontSize="12" TextWrapping="Wrap" Foreground="{DynamicResource TextFillColorPrimaryBrush}" Text="…" />
+                    </StackPanel>
+                </ui:CardControl.Header>
+                <StackPanel Orientation="Horizontal">
+                    <ui:Button Content="{l:T steam.openWindow}" Icon="{ui:SymbolIcon Add24}" Margin="0,0,8,0" Click="AddNonSteam_Click" />
+                    <ui:Button Content="{l:T steam.copyPath}" Icon="{ui:SymbolIcon Copy24}" Click="CopyPath_Click" />
+                </StackPanel>
+            </ui:CardControl>
+            <ui:CardControl Margin="0,0,0,4">
+                <ui:CardControl.Icon>
+                    <ui:FontIcon FontFamily="Segoe UI Semibold" FontSize="16" Glyph="2" />
+                </ui:CardControl.Icon>
+                <ui:CardControl.Header>
+                    <StackPanel>
+                        <ui:TextBlock Foreground="{DynamicResource TextFillColorPrimaryBrush}" FontTypography="Body" TextWrapping="Wrap" Text="{l:T steam.step2}" />
+                        <ui:TextBlock FontTypography="Caption" Foreground="{DynamicResource TextFillColorSecondaryBrush}" TextWrapping="Wrap" Text="{l:T steam.step2Detail}" />
+                    </StackPanel>
+                </ui:CardControl.Header>
+            </ui:CardControl>
+            <ui:CardControl Margin="0,0,0,4">
+                <ui:CardControl.Icon>
+                    <ui:FontIcon FontFamily="Segoe UI Semibold" FontSize="16" Glyph="3" />
+                </ui:CardControl.Icon>
+                <ui:CardControl.Header>
+                    <StackPanel>
+                        <ui:TextBlock Foreground="{DynamicResource TextFillColorPrimaryBrush}" FontTypography="Body" TextWrapping="Wrap" Text="{l:T steam.step3}" />
+                        <ui:TextBlock FontTypography="Caption" Foreground="{DynamicResource TextFillColorSecondaryBrush}" TextWrapping="Wrap" Text="{l:T steam.step3Detail}" />
+                    </StackPanel>
+                </ui:CardControl.Header>
+                <ui:Button Content="{l:T steam.controllerSettings}" Icon="{ui:SymbolIcon Settings24}" Click="ControllerSettings_Click" />
+            </ui:CardControl>
+            <ui:CardControl Margin="0,0,0,4">
+                <ui:CardControl.Icon>
+                    <ui:FontIcon FontFamily="Segoe UI Semibold" FontSize="16" Glyph="4" />
+                </ui:CardControl.Icon>
+                <ui:CardControl.Header>
+                    <StackPanel>
+                        <ui:TextBlock Foreground="{DynamicResource TextFillColorPrimaryBrush}" FontTypography="Body" TextWrapping="Wrap" Text="{l:T steam.step4}" />
+                        <ui:TextBlock FontTypography="Caption" Foreground="{DynamicResource TextFillColorSecondaryBrush}" TextWrapping="Wrap" Text="{l:T steam.step4Detail}" />
+                    </StackPanel>
+                </ui:CardControl.Header>
+            </ui:CardControl>
+
+            <ui:TextBlock FontTypography="Caption" Foreground="{DynamicResource TextFillColorSecondaryBrush}" TextWrapping="Wrap" Margin="4,12,0,0"
+                          Text="{l:T steam.footnote}" />
+        </StackPanel>
+    </ScrollViewer>
+</Page>
